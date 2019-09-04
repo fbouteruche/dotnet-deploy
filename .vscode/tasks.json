@@ -1,0 +1,84 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/dotnet-deploy/dotnet-deploy.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/dotnet-deploy/dotnet-deploy.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/src/dotnet-deploy/dotnet-deploy.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "pack",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "pack",
+                "${workspaceFolder}/src/dotnet-deploy/dotnet-deploy.csproj",
+                "/property:GenerateFullPaths=true"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "uninstall",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "tool",
+                "uninstall",
+                "--global",
+                "dotnet-deploy"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "install",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "tool",
+                "install",
+                "--global",
+                "--add-source",
+                "${workspaceFolder}/src/dotnet-deploy/nupkg",
+                "dotnet-deploy"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "all",
+            "dependsOrder": "sequence",
+            "dependsOn":["build", "pack", "uninstall", "install"]
+        }
+    ]
+}
