@@ -78,7 +78,13 @@
         {
             "label": "all",
             "dependsOrder": "sequence",
-            "dependsOn":["build", "pack", "uninstall", "install"]
+            "dependsOn": [
+                "build",
+                "pack",
+                "uninstall",
+                "install"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
