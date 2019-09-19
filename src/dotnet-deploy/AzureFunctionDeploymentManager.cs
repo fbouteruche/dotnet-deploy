@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace DotnetDeploy
 {
@@ -22,9 +23,10 @@ namespace DotnetDeploy
             if(projectType == "azurefunction")
             {
                 Console.WriteLine("now we have to really deploy it");
+                Process.Start("func", "azure functionapp publish").WaitForExit();
+                Console.WriteLine("after call to func");
                 return true;
             }
-
             return false;
         }
     }
