@@ -22,20 +22,13 @@ https://github.com/fbouteruche/dotnet-deploy",
             application.HelpOption(true);
             application.UsePagerForHelpText = false;
 
-            CommandOption providerOption = application.Option("-p | --provider", "hosting provider", CommandOptionType.SingleValue).IsRequired();
-            providerOption.Accepts().Values("aws", "azure", "gcp");
-      
+            application.AddSubcommand(new AWSSubCommand());
+            application.AddSubcommand(new AzureSubCommand());
+            application.AddSubcommand(new GCPSubCommand());
+            
             application.OnExecute(() =>
                {
-                   if(providerOption.HasValue())
-                   {
-                       string providerName = providerOption.Value();
-                       IHostingProvider hostingProvider = HostingProviderFactory.GetProvider(providerName);
-                       if(hostingProvider != null)
-                       {
-                           bool success = hostingProvider.Deploy();
-                       }
-                   }
+                   application.ShowHelp();
                });
 
             application.Execute(args);
