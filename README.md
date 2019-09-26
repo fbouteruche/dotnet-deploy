@@ -10,7 +10,40 @@ The first target is to support Azure Functions projects.
 
 # Basic usage
 
+```
+Usage: deploy [options] [command]
+
+Options:
+  -?|-h|--help  Show help information
+
+Commands:
+  aws           
+  azure         
+  gcp
+```
+```
+Usage: deploy aws [options]
+
+Options:
+  -?|-h|--help  Show help information
+```
+```
+Usage: deploy azure [options]
+
+Options:
+  -?|-h|--help          Show help information
+  -f|--functionAppName  FunctionAppName used to deploy Azure Functions       
+```
+```
+Usage: gcp [options]
+
+Options:
+  -?|-h|--help  Show help information
+```
+
 # Building from source
+
+dotnet-deploy is developed using Visual Studio Code using Remote Development Extension for WSL. To build the project, you can use the *build* task. To  build, package and deploy the tool locally, you can use the *all* task.
 
 # Questions and comments
 
