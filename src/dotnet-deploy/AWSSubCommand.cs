@@ -15,7 +15,7 @@ namespace DotnetDeploy
                 IHostingProvider hostingProvider = HostingProviderFactory.GetProvider("aws");
                 if(hostingProvider != null)
                 {
-                    bool success = hostingProvider.Deploy();
+                    bool success = hostingProvider.Deploy(null);
                 }
             });
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace DotnetDeploy
 {
@@ -9,7 +10,7 @@ namespace DotnetDeploy
 
         private const string projectFileNameArgumentExceptionMessage = "The parameter projectFileName cannot be null, empty or blanc";
 
-        public bool Deploy(string projectType, string projectFileName)
+        public bool Deploy(string projectType, string projectFileName, Dictionary<string, string> deploymentOptions)
         {
             if (string.IsNullOrWhiteSpace(projectType))
             {
@@ -22,10 +23,11 @@ namespace DotnetDeploy
             }
             if(projectType == "azurefunction")
             {
-                Console.WriteLine("now we have to really deploy it");
-                Process.Start("func", "azure functionapp publish").WaitForExit();
-                Console.WriteLine("after call to func");
-                return true;
+                string functionAppName = (deploymentOptions != null && deploymentOptions.ContainsKey("functionAppName")) ? deploymentOptions["functionAppName"] : String.Empty;
+                
+                Process func = Process.Start("func", String.Format("azure functionapp publish {0}", functionAppName));
+                func.WaitForExit();
+                return (func.ExitCode == 0);
             }
             return false;
         }

@@ -15,7 +15,7 @@ namespace DotnetDeploy
                 IHostingProvider hostingProvider = HostingProviderFactory.GetProvider("gcp");
                 if(hostingProvider != null)
                 {
-                    bool success = hostingProvider.Deploy();
+                    bool success = hostingProvider.Deploy(null);
                 }
             });
         }

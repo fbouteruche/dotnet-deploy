@@ -1,6 +1,7 @@
 using System;
 using System.Xml;
 using System.IO;
+using System.Collections.Generic;
 
 namespace DotnetDeploy
 {
@@ -10,7 +11,7 @@ namespace DotnetDeploy
         private const string azureFunctionType = "azurefunction";
         private const string noProjectFileMessage = "No project file in the current folder";
 
-        public bool Deploy()
+        public bool Deploy(Dictionary<string, string> deploymentOptions)
         {
             Console.WriteLine("Azure provider");
             string[] projectFileNames = DetectProjectFiles();
@@ -30,16 +31,16 @@ namespace DotnetDeploy
                 return false;
             }
 
-            DeployProject(projectType, selectedProjectFile);
+            DeployProject(projectType, selectedProjectFile, deploymentOptions);
             return true;
         }
 
-                private static void DeployProject(string projectType, string selectedProjectFile)
+        private static void DeployProject(string projectType, string selectedProjectFile, Dictionary<string, string> deploymentOptions)
         {
             CompositeDeploymentManager deploymentManager = new CompositeDeploymentManager(
                 new AzureFunctionDeploymentManager());
 
-            if (!deploymentManager.Deploy(projectType, selectedProjectFile))
+            if (!deploymentManager.Deploy(projectType, selectedProjectFile, deploymentOptions))
             {
                 Console.WriteLine("Unable to deploy project type");
             }

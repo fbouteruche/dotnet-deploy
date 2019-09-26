@@ -18,11 +18,12 @@ namespace DotnetDeploy
             }
         }
         public bool Deploy(string projectType,
-                           string projectFileName)
+                           string projectFileName,
+                           Dictionary<string, string> deploymentOptions)
         {
             for(int i = 0; i < deploymentManagers.Count; i++)
             {
-                if(deploymentManagers[i].Deploy(projectType, projectFileName))
+                if(deploymentManagers[i].Deploy(projectType, projectFileName, deploymentOptions))
                 {
                     return true;
                 }
